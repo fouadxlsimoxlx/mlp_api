@@ -3,8 +3,9 @@ import joblib
 
 app = Flask(__name__)
 
-# Load the trained model
-model = joblib.load("mlp_water_quality.pkl")
+# Load the trained model and the scaler
+model = joblib.load('mlp_water_quality.pkl')
+scaler = joblib.load('scaler.pkl')  # Load the scaler as well
 
 # Define the /predict endpoint
 @app.route('/predict', methods=['POST'])
@@ -25,8 +26,11 @@ def predict():
         data['Turbidity']
     ]
 
+    # Scale the features using the loaded scaler
+    features_scaled = scaler.transform([features])
+
     # Get probability for class 1 (potable) from the model
-    proba = model.predict_proba([features])[0][1]  # [0][1] → first sample, class 1
+    proba = model.predict_proba(features_scaled)[0][1]  # [0][1] → first sample, class 1
 
     # Convert to percentage
     percentage = round(proba * 100, 2)
