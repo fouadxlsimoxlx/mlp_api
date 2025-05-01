@@ -6,31 +6,34 @@ app = Flask(__name__)
 # Load the trained model
 model = joblib.load("mlp_water_quality.pkl")
 
+# Define the /predict endpoint
 @app.route('/predict', methods=['POST'])
 def predict():
-    try:
-        data = request.get_json()
+    # Get JSON data from the request
+    data = request.get_json()
 
-        features = [
-            data['ph'],
-            data['Hardness'],
-            data['Solids'],
-            data['Chloramines'],
-            data['Sulfate'],
-            data['Conductivity'],
-            data['Organic_carbon'],
-            data['Trihalomethanes'],
-            data['Turbidity']
-        ]
+    # Extract features from the request
+    features = [
+        data['ph'],
+        data['Hardness'],
+        data['Solids'],
+        data['Chloramines'],
+        data['Sulfate'],
+        data['Conductivity'],
+        data['Organic_carbon'],
+        data['Trihalomethanes'],
+        data['Turbidity']
+    ]
 
-        # Predict probability
-        probas = model.predict_proba([features])[0]
-        percentage = round(probas[1] * 100, 2)  # Probability of potability (class 1)
+    # Get probability for class 1 (potable)
+    proba = model.predict_proba([features])[0][1]  # [0][1] → first sample, class 1
 
-        return jsonify({"potability_percentage": percentage})
+    # Convert to percentage
+    percentage = round(proba * 100, 2)
 
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    # Return the percentage
+    return jsonify({"potability_percentage": percentage})
 
+# Start the Flask app
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
