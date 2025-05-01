@@ -1,60 +1,62 @@
 from flask import Flask, request, jsonify
-import numpy as np
-import joblib  # Use joblib for loading the model and scaler
-import datetime
-import os
+import joblib
 
 app = Flask(__name__)
 
-# Load the trained model and scaler (use your model and scaler file paths here)
-model = joblib.load('mlp_water_quality.pkl')  # Load model with joblib
-scaler = joblib.load('scaler_MLP.pkl')  # Load scaler with joblib (if you saved it)
+# Load the trained model and the scaler
+model = joblib.load('mlp_water_quality.pkl')
+scaler = joblib.load('scaler_MLP.pkl')  # Load the scaler as well
 
-# Store data temporarily in a list or dictionary
-predictions_data = []
+# In-memory storage for the last prediction
+last_prediction = {}
 
-# Function to predict water quality
+# Define the /predict endpoint
 @app.route('/predict', methods=['POST'])
 def predict():
+    global last_prediction
+
+    # Get JSON data from the request
     data = request.get_json()
 
-    # Extract sensor data (parameters)
-    sensor_data = [
-        data['pH'], data['Turbidity'], data['Hardness'], data['Chloramines'], data['Sulfate'],
-        data['Conductivity'], data['Organic_carbon'], data['Trihalomethanes'], data['Solids']
+    # Extract features from the request
+    features = [
+        data['ph'],
+        data['Hardness'],
+        data['Solids'],
+        data['Chloramines'],
+        data['Sulfate'],
+        data['Conductivity'],
+        data['Organic_carbon'],
+        data['Trihalomethanes'],
+        data['Turbidity']
     ]
-    
-    # Convert sensor data to numpy array
-    sensor_data_array = np.array(sensor_data).reshape(1, -1)
-    
-    # Scale the sensor data using the scaler
-    scaled_data = scaler.transform(sensor_data_array)
-    
-    # Predict the water quality
-    prediction_percentage = model.predict(scaled_data)[0]  # Assuming a single output
-    
-    # Store data temporarily
-    predictions_data.append({
-        'parameters': data,
-        'prediction_percentage': prediction_percentage,
-        'timestamp': str(datetime.datetime.now())
-    })
-    
-    # Return prediction and parameters
-    return jsonify({
-        'prediction_percentage': prediction_percentage,
-        'parameters': data
-    })
 
-# Endpoint to get the last prediction data (optional)
+    # Scale the features using the loaded scaler
+    features_scaled = scaler.transform([features])
+
+    # Get probability for class 1 (potable) from the model
+    proba = model.predict_proba(features_scaled)[0][1]  # [0][1] → first sample, class 1
+
+    # Convert to percentage
+    percentage = round(proba * 100, 2)
+
+    # Store the last prediction with its parameters
+    last_prediction = {
+        "potability_percentage": percentage,
+        "parameters": data
+    }
+
+    # Return the percentage in JSON format
+    return jsonify(last_prediction)
+
+# Define the /last_prediction endpoint
 @app.route('/last_prediction', methods=['GET'])
 def get_last_prediction():
-    if predictions_data:
-        return jsonify(predictions_data[-1])
-    return jsonify({"message": "No prediction data available"}), 404
+    if last_prediction:
+        return jsonify(last_prediction)
+    else:
+        return jsonify({"message": "No prediction has been made yet."}), 404
 
+# Start the Flask app
 if __name__ == '__main__':
-    # Get the port from the environment variable (default to 5000 if not set)
-    port = int(os.environ.get("PORT", 5000))
-    # Run the app on 0.0.0.0 with the specified port
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host='0.0.0.0', port=5000)
