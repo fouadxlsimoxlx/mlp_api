@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # Load the trained model and scaler (use your model and scaler file paths here)
 model = joblib.load('mlp_water_quality.pkl')  # Load model with joblib
-scaler = joblib.load('scaler.pkl')  # Load scaler with joblib (if you saved it)
+scaler = joblib.load('scaler_MLP.pkl')  # Load scaler with joblib (if you saved it)
 
 # Store data temporarily in a list or dictionary
 predictions_data = []
