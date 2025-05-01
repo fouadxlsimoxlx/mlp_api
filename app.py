@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 # Load the trained model and the scaler
 model = joblib.load('mlp_water_quality.pkl')
-scaler = joblib.load('scaler.pkl')  # Load the scaler as well
+scaler = joblib.load('scaler_MLP.pkl')  # Load the scaler as well
 
 # Define the /predict endpoint
 @app.route('/predict', methods=['POST'])
