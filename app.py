@@ -1,12 +1,12 @@
 from flask import Flask, request, jsonify
 import numpy as np
-from keras.models import load_model
+import joblib  # Use joblib for loading the model
 import datetime
 
 app = Flask(__name__)
 
 # Load the trained model (use your model file path here)
-model = load_model('mlp_water_quality.pkl')
+model = joblib.load('mlp_water_quality.pkl')  # Load model with joblib
 
 # Store data temporarily in a list or dictionary
 predictions_data = []
@@ -24,7 +24,7 @@ def predict():
     
     # Convert sensor data to numpy array and predict
     prediction_input = np.array(sensor_data).reshape(1, -1)
-    prediction_percentage = model.predict(prediction_input)[0][0]  # Assuming a single output
+    prediction_percentage = model.predict(prediction_input)[0]  # Assuming a single output
     
     # Store data temporarily
     predictions_data.append({
