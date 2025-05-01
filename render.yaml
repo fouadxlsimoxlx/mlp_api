@@ -1,7 +1,8 @@
+version: 1
 services:
   - type: web
-    name: mlp-water-api
+    name: mlp-api
     env: python
-    buildCommand: ""
-    startCommand: python app.py
     plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
