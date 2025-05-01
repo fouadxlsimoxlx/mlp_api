@@ -25,15 +25,12 @@ def predict():
         data['Turbidity']
     ]
 
-    # Get probability for class 1 (potable) from the model
-    proba = model.predict_proba([features])[0][1]  # [0][1] → first sample, class 1
+    # Make prediction
+    prediction = model.predict([features])[0]
 
-    # Convert to percentage
-    percentage = round(proba * 100, 2)
+    # Return the prediction as JSON
+    return jsonify({"potability": int(prediction)})
 
-    # Return the percentage in JSON format
-    return jsonify({"potability_percentage": percentage})
-
-# Start the Flask app
+# Start the Flask app (make sure it runs on any available IP)
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
