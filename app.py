@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import numpy as np
 import joblib  # Use joblib for loading the model and scaler
 import datetime
+import os
 
 app = Flask(__name__)
 
@@ -53,4 +54,7 @@ def get_last_prediction():
     return jsonify({"message": "No prediction data available"}), 404
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Get the port from the environment variable (default to 5000 if not set)
+    port = int(os.environ.get("PORT", 5000))
+    # Run the app on 0.0.0.0 with the specified port
+    app.run(host='0.0.0.0', port=port, debug=True)
