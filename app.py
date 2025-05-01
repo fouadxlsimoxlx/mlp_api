@@ -1,12 +1,13 @@
 from flask import Flask, request, jsonify
 import numpy as np
-import joblib  # Use joblib for loading the model
+import joblib  # Use joblib for loading the model and scaler
 import datetime
 
 app = Flask(__name__)
 
-# Load the trained model (use your model file path here)
+# Load the trained model and scaler (use your model and scaler file paths here)
 model = joblib.load('mlp_water_quality.pkl')  # Load model with joblib
+scaler = joblib.load('scaler.pkl')  # Load scaler with joblib (if you saved it)
 
 # Store data temporarily in a list or dictionary
 predictions_data = []
@@ -22,9 +23,14 @@ def predict():
         data['Conductivity'], data['Organic_carbon'], data['Trihalomethanes']
     ]
     
-    # Convert sensor data to numpy array and predict
-    prediction_input = np.array(sensor_data).reshape(1, -1)
-    prediction_percentage = model.predict(prediction_input)[0]  # Assuming a single output
+    # Convert sensor data to numpy array
+    sensor_data_array = np.array(sensor_data).reshape(1, -1)
+    
+    # Scale the sensor data using the scaler
+    scaled_data = scaler.transform(sensor_data_array)
+    
+    # Predict the water quality
+    prediction_percentage = model.predict(scaled_data)[0]  # Assuming a single output
     
     # Store data temporarily
     predictions_data.append({
