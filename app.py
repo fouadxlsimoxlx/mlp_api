@@ -21,7 +21,7 @@ def predict():
     # Extract sensor data (parameters)
     sensor_data = [
         data['pH'], data['Turbidity'], data['Hardness'], data['Chloramines'], data['Sulfate'],
-        data['Conductivity'], data['Organic_carbon'], data['Trihalomethanes']
+        data['Conductivity'], data['Organic_carbon'], data['Trihalomethanes'], data['Solids']
     ]
     
     # Convert sensor data to numpy array
