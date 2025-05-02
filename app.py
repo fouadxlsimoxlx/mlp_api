@@ -8,8 +8,8 @@ app = Flask(__name__)
 mlp_model = joblib.load('mlp_water_quality.pkl')
 mlp_scaler = joblib.load('scaler_MLP.pkl')  # MLP Scaler
 
-# dnn_model = tf.keras.models.load_model('dnn_water_quality_model.h5')  # DNN model (commented out)
-# dnn_scaler = joblib.load('scaler_DNN.pkl')  # DNN Scaler (commented out)
+dnn_model = tf.keras.models.load_model('dnn_water_quality_model.h5')  # DNN model (commented out)
+dnn_scaler = joblib.load('scaler_DNN.pkl')  # DNN Scaler (commented out)
 
 knn_model = joblib.load('knn_water_quality.pkl')
 knn_scaler = joblib.load('scaler_knn.pkl')
@@ -43,28 +43,28 @@ def predict():
 
     # Scale features using respective scalers
     mlp_features_scaled = mlp_scaler.transform([features])
-    # dnn_features_scaled = dnn_scaler.transform([features])  # Commented out
+    dnn_features_scaled = dnn_scaler.transform([features])  # Commented out
     knn_features_scaled = knn_scaler.transform([features])
     log_reg_features_scaled = log_reg_scaler.transform([features])
     rf_features_scaled = rf_scaler.transform([features])
 
     # Get predictions from each model
     mlp_proba = mlp_model.predict_proba(mlp_features_scaled)[0][1]
-    # dnn_proba = dnn_model.predict(dnn_features_scaled)[0][0]  # Commented out
+    dnn_proba = dnn_model.predict(dnn_features_scaled)[0][0]  # Commented out
     knn_proba = knn_model.predict_proba(knn_features_scaled)[0][1]
     log_reg_proba = log_reg_model.predict_proba(log_reg_features_scaled)[0][1]
     rf_proba = rf_model.predict_proba(rf_features_scaled)[0][1]
 
     # Convert probabilities to percentages
     mlp_percentage = round(mlp_proba * 100, 2)
-    # dnn_percentage = round(dnn_proba * 100, 2)  # Commented out
+    dnn_percentage = round(dnn_proba * 100, 2)  # Commented out
     knn_percentage = round(knn_proba * 100, 2)
     log_reg_percentage = round(log_reg_proba * 100, 2)
     rf_percentage = round(rf_proba * 100, 2)
 
     last_prediction = {
         "mlp_potability_percentage": mlp_percentage,
-        # "dnn_potability_percentage": dnn_percentage,  # Commented out
+        "dnn_potability_percentage": dnn_percentage,  # Commented out
         "knn_potability_percentage": knn_percentage,
         "log_reg_potability_percentage": log_reg_percentage,
         "rf_potability_percentage": rf_percentage,
