@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 import joblib
-# import tensorflow as tf  # DNN library (commented out)
+import tensorflow as tf  # DNN library (commented out)
 
 app = Flask(__name__)
 
