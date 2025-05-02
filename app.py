@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 import joblib
-import tensorflow as tf  # DNN library (commented out)
+from keras.models import load_model
 
 app = Flask(__name__)
 
@@ -8,7 +8,8 @@ app = Flask(__name__)
 mlp_model = joblib.load('mlp_water_quality.pkl')
 mlp_scaler = joblib.load('scaler_MLP.pkl')  # MLP Scaler
 
-dnn_model = tf.keras.models.load_model('dnn_water_quality_model.h5')  # DNN model (commented out)
+dnn_model = load_model('dnn_water_quality_model.h5')
+#dnn_model = tf.keras.models.load_model('dnn_water_quality_model.h5')  # DNN model (commented out)
 dnn_scaler = joblib.load('scaler_DNN.pkl')  # DNN Scaler (commented out)
 
 knn_model = joblib.load('knn_water_quality.pkl')
