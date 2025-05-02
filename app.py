@@ -11,14 +11,14 @@ mlp_scaler = joblib.load('scaler_MLP.pkl')  # MLP Scaler
 # dnn_model = tf.keras.models.load_model('dnn_water_quality_model.h5')  # DNN model (commented out)
 # dnn_scaler = joblib.load('scaler_DNN.pkl')  # DNN Scaler (commented out)
 
-knn_model = joblib.load('knn_water_quality_model.pkl')
-knn_scaler = joblib.load('scaler_KNN.pkl')
+knn_model = joblib.load('knn_water_quality.pkl')
+knn_scaler = joblib.load('scaler_knn.pkl')
 
-log_reg_model = joblib.load('log_reg_water_quality_model.pkl')
-log_reg_scaler = joblib.load('scaler_LogReg.pkl')
+log_reg_model = joblib.load('logistic_regression_model.pkl')
+log_reg_scaler = joblib.load('scaler_logisticR.pkl')
 
-rf_model = joblib.load('rf_water_quality_model.pkl')
-rf_scaler = joblib.load('scaler_RF.pkl')
+rf_model = joblib.load('random_forest_water_quality.pkl')
+rf_scaler = joblib.load('scaler_RandomF.pkl')
 
 # In-memory storage for the last prediction
 last_prediction = {}
