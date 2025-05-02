@@ -46,28 +46,28 @@ def predict():
     # dnn_features_scaled = dnn_scaler.transform([features])  # Commented out
     knn_features_scaled = knn_scaler.transform([features])
     log_reg_features_scaled = log_reg_scaler.transform([features])
-    #rf_features_scaled = rf_scaler.transform([features])
+    rf_features_scaled = rf_scaler.transform([features])
 
     # Get predictions from each model
     mlp_proba = mlp_model.predict_proba(mlp_features_scaled)[0][1]
     # dnn_proba = dnn_model.predict(dnn_features_scaled)[0][0]  # Commented out
     knn_proba = knn_model.predict_proba(knn_features_scaled)[0][1]
     log_reg_proba = log_reg_model.predict_proba(log_reg_features_scaled)[0][1]
-    #rf_proba = rf_model.predict_proba(rf_features_scaled)[0][1]
+    rf_proba = rf_model.predict_proba(rf_features_scaled)[0][1]
 
     # Convert probabilities to percentages
     mlp_percentage = round(mlp_proba * 100, 2)
     # dnn_percentage = round(dnn_proba * 100, 2)  # Commented out
     knn_percentage = round(knn_proba * 100, 2)
     log_reg_percentage = round(log_reg_proba * 100, 2)
-    #rf_percentage = round(rf_proba * 100, 2)
+    rf_percentage = round(rf_proba * 100, 2)
 
     last_prediction = {
         "mlp_potability_percentage": mlp_percentage,
         # "dnn_potability_percentage": dnn_percentage,  # Commented out
         "knn_potability_percentage": knn_percentage,
         "log_reg_potability_percentage": log_reg_percentage,
-        #"rf_potability_percentage": rf_percentage,
+        "rf_potability_percentage": rf_percentage,
         "parameters": data
     }
 
