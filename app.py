@@ -1,6 +1,18 @@
 from flask import Flask, request, jsonify
 import joblib
 import tensorflow as tf
+import firebase_admin
+from firebase_admin import credentials, firestore
+
+
+
+# Initialize Firebase Admin SDK
+cred = credentials.Certificate('google-services.json')  # Replace with your actual filename
+firebase_admin.initialize_app(cred)
+
+# Get Firestore client
+db = firestore.client()
+
 
 app = Flask(__name__)
 
@@ -72,6 +84,25 @@ def predict():
         "parameters": data
     }
 
+    # Store the result in Firestore
+    db.collection('predictions').add({
+        'ph': data['ph'],
+        'Hardness': data['Hardness'],
+        'Solids': data['Solids'],
+        'Chloramines': data['Chloramines'],
+        'Sulfate': data['Sulfate'],
+        'Conductivity': data['Conductivity'],
+        'Organic_carbon': data['Organic_carbon'],
+        'Trihalomethanes': data['Trihalomethanes'],
+        'Turbidity': data['Turbidity'],
+        'mlp_potability_percentage': mlp_percentage,
+        'dnn_potability_percentage': dnn_percentage,
+        'knn_potability_percentage': knn_percentage,
+        'log_reg_potability_percentage': log_reg_percentage,
+        'rf_potability_percentage': rf_percentage,
+        'timestamp': firestore.SERVER_TIMESTAMP,
+    })
+    
     return jsonify(last_prediction)
 
 @app.route('/last_prediction', methods=['GET'])
