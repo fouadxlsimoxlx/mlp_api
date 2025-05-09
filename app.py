@@ -7,7 +7,7 @@ from firebase_admin import credentials, firestore
 
 
 # Initialize Firebase Admin SDK
-cred = credentials.Certificate('water-quality-db.json')  # Replace with your actual filename
+cred = credentials.Certificate('/etc/secrets/water-quality-db-2.json')  # Replace with your actual filename
 firebase_admin.initialize_app(cred)
 
 # Get Firestore client
