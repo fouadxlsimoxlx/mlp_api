@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "water-quality-db-2c647",
+  "private_key_id": "5b078b1b22f02d755f2caf8f5dc4e4aa1b00d609",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQC1Rv2FQRnKbiyV\nqBo7wUJ3myXAqSctvWNxKSpZYOL6z+9Z0WN8TQRrRiMs1/phTGs/7WIplTh6wbyZ\niaNdmVqTusR++NaBxK7pSkeMhIg316RyYIOdAjbIhZxG4PqocduJaS5dxv8gtuqs\nf7vDZ+xF9nNn/yMuRmNxq6NRml4vpjMfVBbrmzUK7WbzpQUeBY8wD6OQQ4ZJQrwz\n/B0tANL/BaHz9sPJy1LbCNp14bUBRJFJ5+TW4xhaUD0w5hZMvYwhTr2L54X7tZAC\npyWXXWYcsm4rHIRVGZi136Qn1wP2fig1V0qqCrKb5eSfQcLnQDOm88D4ejAhpoDJ\nGdm9ghZvAgMBAAECggEAU6P+LKI1gqvkAWdPN1v7zZD10deaXqXgQKG0SwoDoKMZ\ndlFA/GTS0aZKa5H5kjQ+1f+zB6m0phtG6HbTvEeaPchyin1JCBYWeEiQC7tI2K80\nTpvOjj6rxUi0qxV6QgdKurOfs6AyLkeHrvC+0zHbmApXBFh5xIuwrY16rRezNntJ\nxFScnkRVaA3udUh2mhTECUnJr6T5uRk7rndydyjS1T7nkhIa/BZFbpHyK8K+gMTs\nmtN0WrwZip6YYkVws+mrRdJZtYSTIo1PyCP8ho7XSE91H2Sl/yGaIWCVUS0t6EPO\nTdntrGcUKwmwu9X8UE8qM7JmrKitQBwOcJbtfcibcQKBgQD2pKiRRv8VhKg9zoEU\noz7/W1+bxEVQyu+kbvpjsU/vp8znOABeghjiPF90b7Js26VY+uf4/E0d+uHzKQ2E\nHqJlKqYJI0eK6OabxgqEUrCWdBRQHpJWz3nVOEeh2uKSpkSYWjih3RHqoZgftWPr\nmskoLc0+dkUErjMPUeaXexOJ0QKBgQC8J4Ny0vUhF3bDWQVYGE3cVWgXMWF7lC8q\nNgtHbqJHrN289O7hraJiScLcv/9wJQRqW43nTlVylql6uWFNRJNz8OJWQlSnKU6t\nnie3iJYfobhUKkQTZ/iR71Quh3fEVxbIbLMaPh4+JC+5pjZx+HTw38iBDU0zibBI\nrvvoQV9sPwKBgQDoPo4YFkE18u81G9GCLGGytEin9T3L4Puc239dBmad5WTVSG9Y\njqp9xZmgm1jolj7xNXnfgzveghHnFP4MLYh/OJSVwCmqzLnxbp8SkIaFdZJ3CwKD\nSeSP+OnCp8h3jKbEyxfOmss3I6iKGxSWku7drZs5OMaurJWZ1GYMt7DjMQKBgQCn\nf22PfKln6iF5yfft8sTtjsJ5UyZ7AvHx2+aykpS4xfUnz8wQ76gNY6irJ+jYBrwl\nipeLALskpWb+r6UlShUSM7DqJWaC4Uz/Vjn5Mwih5C/aDT5JIFeyYqJIQaSnDvhj\nOBFBHWeC3mf2FzeEwjAodq9h41uEs+BQ9CWhHwE5tQKBgQCFKVBFp75rppWMLayU\nSNrgZPNuKpGpROdKVuRwW/59vj4zDULvVKyvI8Xpgdr+3XehYQVuRI4qb8IsSP0h\ntAvFBaxOfM/OuNg1cASjY64gEi6Sh3Wjbz7OTFn94UIs5fxXV4RNanTtpkwy3rc6\nYHhJPIY21nK1o9C3n4kjlROjYw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-fbsvc@water-quality-db-2c647.iam.gserviceaccount.com",
+  "client_id": "113758844992590335790",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40water-quality-db-2c647.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
